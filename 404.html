@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>BetterOS | Your Personal AI Advisory Board</title>
+    <script>
+      // GitHub Pages SPA routing redirect
+      // This is called when a route doesn't exist as a physical file
+      // We redirect to index.html and let Alpine.js handle the routing
+      
+      var pathSegments = window.location.pathname.split('/').filter(Boolean);
+      var lastSegment = pathSegments[pathSegments.length - 1];
+      
+      // Extract just the page name (remove any query params or file extensions)
+      var pageName = lastSegment ? lastSegment.split('.')[0] : '';
+      
+      // Known routes
+      var validRoutes = ['', 'landing', 'manifesto', 'pricing', 'privacy', 'terms'];
+      
+      // If it's a valid route, redirect to root with hash for client-side routing
+      if (validRoutes.includes(pageName)) {
+        var redirectPath = '/index.html' + (pageName && pageName !== 'index' ? '?redirect=' + pageName : '');
+        // Replace history to avoid back button loops
+        window.location.replace(redirectPath);
+      } else {
+        // Unknown route, go to home
+        window.location.replace('/index.html');
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Fallback message if JavaScript is disabled -->
+    <p>Redirecting to BetterOS...</p>
+  </body>
+</html>
